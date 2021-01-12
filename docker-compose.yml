@@ -1,6 +1,16 @@
 version : '3'
 
 services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./swagger:/usr/share/nginx/html/swagger
+    environment:
+      API_URL: swagger/openapi.json
+
   nginx:
     build:
       context: .
@@ -8,7 +18,7 @@ services:
     volumes:
       - ./symfony/:/var/www/symfony
     ports:
-      - 8001:80
+      - 8003:80
     networks:
       - symfony
   php:
