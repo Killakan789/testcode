@@ -88,15 +88,7 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customers = $this->customerRepository->findAll();
-        $data = $customers;
         foreach ($customers as $customer) {
-            $data[] = [
-                'id' => $customer->getId(),
-                'firstName' => $customer->getFirstName(),
-                'lastName' => $customer->getLastName(),
-                'email' => $customer->getEmail(),
-                'phoneNumber' => $customer->getPhoneNumber(),
-            ];
             $errors = $validator->validate($customer);
             if (count($errors) > 0) {
                  /*
