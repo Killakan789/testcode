@@ -3,12 +3,20 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CustomerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Entity\Customer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 
 
 
@@ -33,13 +41,22 @@ class CustomerController
         $email = $data['email'];
         $phoneNumber = $data['phoneNumber'];
 
+        $arrayofData = [
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'phoneNumber' => $phoneNumber
+        ];
+
+
         if (empty($firstName) || empty($lastName) || empty($email) || empty($phoneNumber)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
 
+
         $this->customerRepository->saveCustomer($firstName, $lastName, $email, $phoneNumber);
 
-        return new JsonResponse(['status' => 'Customer created!'], Response::HTTP_CREATED);
+        return new JsonResponse(['status' => 'Customer created!','data' => $jsonContent], Response::HTTP_CREATED);
     }
 
     /**
@@ -61,13 +78,17 @@ class CustomerController
     }
 
     /**
-     * @Route("/customer/", name="get_all_customers", methods={"GET"})
-     */
-    public function getAll(): JsonResponse
+    //     * @Route("/customer/", name="get_all_customers", methods={"GET"})
+    //     */
+    public function getAll(ValidatorInterface $validator)
     {
-        $customers = $this->customerRepository->findAll();
-        $data = [];
 
+
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+        $customers = $this->customerRepository->findAll();
+        $data = $customers;
         foreach ($customers as $customer) {
             $data[] = [
                 'id' => $customer->getId(),
@@ -76,10 +97,47 @@ class CustomerController
                 'email' => $customer->getEmail(),
                 'phoneNumber' => $customer->getPhoneNumber(),
             ];
+            $errors = $validator->validate($customer);
+            if (count($errors) > 0) {
+                 /*
+                   * Uses a __toString method on the $errors variable which is a
+                   * ConstraintViolationList object. This gives us a nice string
+                   * for debugging.
+                   */
+                $errorsString = (string) $errors;
+                return new Response($errorsString);
+            }
         }
+        $jsonContent = $serializer->serialize($customers, 'json');
+        return new Response($jsonContent, Response::HTTP_OK);
 
-        return new JsonResponse($data, Response::HTTP_OK);
+
+
     }
+
+//    /**
+//     * @Route("/customer/", name="get_all_customers", methods={"GET"})
+//     */
+//    public function getAll(): JsonResponse
+//    {
+//        $customers = $this->customerRepository->findAll();
+//        $data = $customers;
+//
+//        return $customers;
+//
+////        foreach ($customers as $customer) {
+////            $data[] = [
+////                'id' => $customer->getId(),
+////                'firstName' => $customer->getFirstName(),
+////                'lastName' => $customer->getLastName(),
+////                'email' => $customer->getEmail(),
+////                'phoneNumber' => $customer->getPhoneNumber(),
+////            ];
+////        }
+////
+////
+////        return new JsonResponse($data, Response::HTTP_OK);
+//    }
 
 
     /**

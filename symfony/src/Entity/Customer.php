@@ -4,6 +4,13 @@ namespace App\Entity;
 
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
@@ -92,6 +99,7 @@ class Customer
 
     public function toArray()
     {
+
         return [
             'id' => $this->getId(),
             'firstName' => $this->getFirstName(),
@@ -100,4 +108,8 @@ class Customer
             'phoneNumber' => $this->getPhoneNumber()
         ];
     }
+
+
+
+
 }
