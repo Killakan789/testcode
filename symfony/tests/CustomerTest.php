@@ -4,13 +4,13 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class PostControllerTest extends WebTestCase
+class CustomerTest extends WebTestCase
 {
-    public function testShowPost()
+    public function testMain()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/post/hello-world');
+        $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
