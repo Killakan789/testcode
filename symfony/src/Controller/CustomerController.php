@@ -44,10 +44,12 @@ class CustomerController
         $lastName = $data['lastName'];
         $email = $data['email'];
         $phoneNumber = $data['phoneNumber'];
+
         if (empty($firstName) || empty($lastName) || empty($email) || empty($phoneNumber)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
-        //creating asserts in order to check entered values
+
+        //creating assert in order to check entered values
         $emailCheck = new Assert\Email();
         $emailCheck->message = 'Invalid email address';
 
@@ -84,6 +86,7 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
+        //if customer is not found
         if($customer === null ){
             $errorsString = (string) "Customer not found with a certain id";
             return new Response($errorsString);
@@ -127,6 +130,7 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
+        //if customer is not found
         if($customer === null ){
             $errorsString = (string) "Customer not found with a certain id";
             return new Response($errorsString);
@@ -159,6 +163,7 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
+        //if customer is not found
         if($customer === null ){
             $errorsString = (string) "Customer not found with a certain id";
             return new Response($errorsString);
