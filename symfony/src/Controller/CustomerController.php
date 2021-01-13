@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -32,8 +33,11 @@ class CustomerController
     /**
      * @Route("/customer/add", name="add_customer", methods={"POST"})
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request,ValidatorInterface $validator)
     {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
         $data = json_decode($request->getContent(), true);
 
         $firstName = $data['firstName'];
@@ -48,33 +52,56 @@ class CustomerController
             'phoneNumber' => $phoneNumber
         ];
 
-
         if (empty($firstName) || empty($lastName) || empty($email) || empty($phoneNumber)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
 
+        //creating asserts in order to check entered values
 
-        $this->customerRepository->saveCustomer($firstName, $lastName, $email, $phoneNumber);
 
-        return new JsonResponse(['status' => 'Customer created!','data' => $jsonContent], Response::HTTP_CREATED);
+        $emailCheck = new Assert\Email();
+        $emailCheck->message = 'Invalid email address';
+
+        $errors = $validator->validate(
+            $email,
+            $emailCheck
+        );
+
+        if (0 === count($errors)) {
+            // ... this IS a valid email address, do something
+            $customer = new Customer();
+            $customer->setFirstName($firstName);
+            $customer->setLastName($lastName);
+            $customer->setEmail($email);
+            $customer->setPhoneNumber($phoneNumber);
+            $this->customerRepository->saveCustomer($firstName, $lastName, $email, $phoneNumber);
+            $jsonContent = $serializer->serialize($customer, 'json');
+            return new Response($jsonContent, Response::HTTP_OK);
+        } else {
+            // this is *not* a valid email address
+            $errorMessage = $errors[0]->getMessage();
+            $jsonContent = $serializer->serialize($errorMessage, 'json');
+            return new Response($jsonContent, Response::HTTP_OK);
+            // ... do something with the error
+        }
     }
 
     /**
      * @Route("/customer/{id}", name="get_one_customer", methods={"GET"})
      */
-    public function get($id): JsonResponse
+    public function get($id, ValidatorInterface $validator)
     {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
-
-        $data = [
-            'id' => $customer->getId(),
-            'firstName' => $customer->getFirstName(),
-            'lastName' => $customer->getLastName(),
-            'email' => $customer->getEmail(),
-            'phoneNumber' => $customer->getPhoneNumber(),
-        ];
-
-        return new JsonResponse($data, Response::HTTP_OK);
+        $errors = $validator->validate($customer);
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+            return new Response($errorsString);
+        }
+        $jsonContent = $serializer->serialize($customer, 'json');
+        return new Response($jsonContent, Response::HTTP_OK);
     }
 
     /**
@@ -82,8 +109,6 @@ class CustomerController
     //     */
     public function getAll(ValidatorInterface $validator)
     {
-
-
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
@@ -91,52 +116,23 @@ class CustomerController
         foreach ($customers as $customer) {
             $errors = $validator->validate($customer);
             if (count($errors) > 0) {
-                 /*
-                   * Uses a __toString method on the $errors variable which is a
-                   * ConstraintViolationList object. This gives us a nice string
-                   * for debugging.
-                   */
                 $errorsString = (string) $errors;
                 return new Response($errorsString);
             }
         }
         $jsonContent = $serializer->serialize($customers, 'json');
         return new Response($jsonContent, Response::HTTP_OK);
-
-
-
     }
-
-//    /**
-//     * @Route("/customer/", name="get_all_customers", methods={"GET"})
-//     */
-//    public function getAll(): JsonResponse
-//    {
-//        $customers = $this->customerRepository->findAll();
-//        $data = $customers;
-//
-//        return $customers;
-//
-////        foreach ($customers as $customer) {
-////            $data[] = [
-////                'id' => $customer->getId(),
-////                'firstName' => $customer->getFirstName(),
-////                'lastName' => $customer->getLastName(),
-////                'email' => $customer->getEmail(),
-////                'phoneNumber' => $customer->getPhoneNumber(),
-////            ];
-////        }
-////
-////
-////        return new JsonResponse($data, Response::HTTP_OK);
-//    }
 
 
     /**
      * @Route("/customer/update/{id}", name="update_customer", methods={"PUT"})
      */
-    public function update($id, Request $request): JsonResponse
+    public function update($id, Request $request,ValidatorInterface $validator)
     {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
@@ -144,22 +140,35 @@ class CustomerController
         empty($data['lastName']) ? true : $customer->setLastName($data['lastName']);
         empty($data['email']) ? true : $customer->setEmail($data['email']);
         empty($data['phoneNumber']) ? true : $customer->setPhoneNumber($data['phoneNumber']);
+        $errors = $validator->validate($customer);
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+            return new Response($errorsString);
+        }else{
+            $this->customerRepository->updateCustomer($customer);
+            $jsonContent = $serializer->serialize($customer, 'json');
+            return new Response($jsonContent, Response::HTTP_OK);
+        }
 
-        $updatedCostumer = $this->customerRepository->updateCustomer($customer);
-
-        return new JsonResponse($updatedCostumer->toArray(), Response::HTTP_OK);
     }
 
 
     /**
      * @Route("/customer/delete/{id}", name="delete_customer", methods={"DELETE"})
      */
-    public function delete($id): JsonResponse
+    public function delete($id,ValidatorInterface $validator)
     {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
-
-        $this->customerRepository->removeCustomer($customer);
-
-        return new JsonResponse(['status' => 'Customer deleted'], Response::HTTP_NO_CONTENT);
+        if($customer === null ){
+            $errorsString = (string) "Customer not found with a certain id";
+            return new Response($errorsString);
+        }else{
+            $this->customerRepository->removeCustomer($customer);
+            $jsonContent = $serializer->serialize($customer, 'json');
+            return new Response($jsonContent, Response::HTTP_OK);
+        }
     }
 }
