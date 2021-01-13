@@ -44,21 +44,10 @@ class CustomerController
         $lastName = $data['lastName'];
         $email = $data['email'];
         $phoneNumber = $data['phoneNumber'];
-
-        $arrayofData = [
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'email' => $email,
-            'phoneNumber' => $phoneNumber
-        ];
-
         if (empty($firstName) || empty($lastName) || empty($email) || empty($phoneNumber)) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
-
         //creating asserts in order to check entered values
-
-
         $emailCheck = new Assert\Email();
         $emailCheck->message = 'Invalid email address';
 
@@ -69,12 +58,12 @@ class CustomerController
 
         if (0 === count($errors)) {
             // ... this IS a valid email address, do something
+            $this->customerRepository->saveCustomer($firstName, $lastName, $email, $phoneNumber);
             $customer = new Customer();
             $customer->setFirstName($firstName);
             $customer->setLastName($lastName);
             $customer->setEmail($email);
             $customer->setPhoneNumber($phoneNumber);
-            $this->customerRepository->saveCustomer($firstName, $lastName, $email, $phoneNumber);
             $jsonContent = $serializer->serialize($customer, 'json');
             return new Response($jsonContent, Response::HTTP_OK);
         } else {
@@ -95,6 +84,10 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
+        if($customer === null ){
+            $errorsString = (string) "Customer not found with a certain id";
+            return new Response($errorsString);
+        }
         $errors = $validator->validate($customer);
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -134,6 +127,10 @@ class CustomerController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
+        if($customer === null ){
+            $errorsString = (string) "Customer not found with a certain id";
+            return new Response($errorsString);
+        }
         $data = json_decode($request->getContent(), true);
 
         empty($data['firstName']) ? true : $customer->setFirstName($data['firstName']);
