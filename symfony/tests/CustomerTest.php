@@ -14,4 +14,14 @@ class CustomerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+
+    public function testCustomerAll()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/customer/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }
