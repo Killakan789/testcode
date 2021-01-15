@@ -150,6 +150,7 @@ class CustomerController
     }
 
 
+    
     /**
      * @Route("/customer/delete/{id}", name="delete_customer", methods={"DELETE"})
      */
