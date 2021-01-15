@@ -25,19 +25,21 @@ class CustomerController
 {
     private $customerRepository;
 
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator)
     {
         $this->customerRepository = $customerRepository;
+        $this->validator = $validator;
+        $this->encoders = $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $this->normalizers = $normalizers = [new ObjectNormalizer()];
+        $this->serializer  = $serializer = new Serializer($normalizers, $encoders);
     }
 
     /**
      * @Route("/customer/add", name="add_customer", methods={"POST"})
      */
-    public function add(Request $request,ValidatorInterface $validator)
+    public function add(Request $request)
     {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
+
         $data = json_decode($request->getContent(), true);
 
         $firstName = $data['firstName'];
@@ -53,7 +55,7 @@ class CustomerController
         $emailCheck = new Assert\Email();
         $emailCheck->message = 'Invalid email address';
 
-        $errors = $validator->validate(
+        $errors = $this->validator->validate(
             $email,
             $emailCheck
         );
@@ -66,12 +68,12 @@ class CustomerController
             $customer->setLastName($lastName);
             $customer->setEmail($email);
             $customer->setPhoneNumber($phoneNumber);
-            $jsonContent = $serializer->serialize($customer, 'json');
+            $jsonContent = $this->serializer->serialize($customer, 'json');
             return new Response($jsonContent, Response::HTTP_OK);
         } else {
             // this is *not* a valid email address
             $errorMessage = $errors[0]->getMessage();
-            $jsonContent = $serializer->serialize($errorMessage, 'json');
+            $jsonContent = $this->serializer->serialize($errorMessage, 'json');
             return new Response($jsonContent, Response::HTTP_OK);
             // ... do something with the error
         }
@@ -80,43 +82,39 @@ class CustomerController
     /**
      * @Route("/customer/{id}", name="get_one_customer", methods={"GET"})
      */
-    public function get($id, ValidatorInterface $validator)
+    public function get($id)
     {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
+
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
         //if customer is not found
         if($customer === null ){
             $errorsString = (string) "Customer not found with a certain id";
             return new Response($errorsString);
         }
-        $errors = $validator->validate($customer);
+        $errors = $this->validator->validate($customer);
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
             return new Response($errorsString);
         }
-        $jsonContent = $serializer->serialize($customer, 'json');
+        $jsonContent = $this->serializer->serialize($customer, 'json');
         return new Response($jsonContent, Response::HTTP_OK);
     }
 
     /**
     //     * @Route("/customer/", name="get_all_customers", methods={"GET"})
     //     */
-    public function getAll(ValidatorInterface $validator)
+    public function getAll()
     {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
+
         $customers = $this->customerRepository->findAll();
         foreach ($customers as $customer) {
-            $errors = $validator->validate($customer);
+            $errors = $this->validator->validate($customer);
             if (count($errors) > 0) {
                 $errorsString = (string) $errors;
                 return new Response($errorsString);
             }
         }
-        $jsonContent = $serializer->serialize($customers, 'json');
+        $jsonContent = $this->serializer->serialize($customers, 'json');
         return new Response($jsonContent, Response::HTTP_OK);
     }
 
@@ -124,11 +122,9 @@ class CustomerController
     /**
      * @Route("/customer/update/{id}", name="update_customer", methods={"PUT"})
      */
-    public function update($id, Request $request,ValidatorInterface $validator)
+    public function update($id, Request $request)
     {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
+
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
         //if customer is not found
         if($customer === null ){
@@ -141,13 +137,13 @@ class CustomerController
         empty($data['lastName']) ? true : $customer->setLastName($data['lastName']);
         empty($data['email']) ? true : $customer->setEmail($data['email']);
         empty($data['phoneNumber']) ? true : $customer->setPhoneNumber($data['phoneNumber']);
-        $errors = $validator->validate($customer);
+        $errors = $this->validator->validate($customer);
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
             return new Response($errorsString);
         }else{
             $this->customerRepository->updateCustomer($customer);
-            $jsonContent = $serializer->serialize($customer, 'json');
+            $jsonContent = $this->serializer->serialize($customer, 'json');
             return new Response($jsonContent, Response::HTTP_OK);
         }
 
@@ -157,7 +153,7 @@ class CustomerController
     /**
      * @Route("/customer/delete/{id}", name="delete_customer", methods={"DELETE"})
      */
-    public function delete($id,ValidatorInterface $validator)
+    public function delete($id)
     {
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
