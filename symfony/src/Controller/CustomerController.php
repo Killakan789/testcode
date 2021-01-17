@@ -9,14 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CustomerRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Customer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -26,13 +21,11 @@ class CustomerController
 {
     private $customerRepository;
 
-    public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator)
+    public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator,SerializerInterface $serializer)
     {
         $this->customerRepository = $customerRepository;
         $this->validator = $validator;
-        $this->encoders  = [new XmlEncoder(), new JsonEncoder()];
-        $this->normalizers = [new ObjectNormalizer()];
-        $this->serializer  =  new Serializer($this->normalizers, $this->encoders);
+        $this->serializer  =  $serializer;
     }
 
     /**
