@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CustomerRepository;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Customer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,6 +40,9 @@ class CustomerController
             $customer = $this->customerRepository->saveCustomer($dto->firstName, $dto->lastName, $dto->email, $dto->phoneNumber);
             $jsonContent = $this->serializer->serialize($customer,'json');
             return new Response($jsonContent, Response::HTTP_OK);
+        }else{
+            $jsonContent = $this->serializer->serialize($errors,'json');
+            return new Response($jsonContent, Response::HTTP_OK);
         }
     }
 
@@ -64,7 +66,6 @@ class CustomerController
     //     */
     public function getAll()
     {
-
         $customers = $this->customerRepository->findAll();
         foreach ($customers as $customer) {
             $errors = $this->validator->validate($customer);
@@ -123,4 +124,5 @@ class CustomerController
             return new Response($jsonContent, Response::HTTP_OK);
         }
     }
+
 }
