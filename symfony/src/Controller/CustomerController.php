@@ -58,7 +58,15 @@ class CustomerController
             return new Response($errorsString);
         }
         $jsonContent = $this->serializer->serialize($customer, 'json');
-        return new Response($jsonContent, Response::HTTP_OK);
+        $dto = $this->serializer->deserialize($jsonContent, CustomerDTO::class, 'json');
+        //validate fields
+        $errors = $this->validator->validate($dto);
+        if (0 === count($errors)) {
+            return new Response($jsonContent, Response::HTTP_OK);
+        }else{
+            $jsonContent = $this->serializer->serialize($errors,'json');
+            return new Response($jsonContent, Response::HTTP_OK);
+        }
     }
 
     /**
@@ -68,6 +76,9 @@ class CustomerController
     {
         $customers = $this->customerRepository->findAll();
         foreach ($customers as $customer) {
+            $jsonContent = $this->serializer->serialize($customer, 'json');
+            $dto = $this->serializer->deserialize($jsonContent, CustomerDTO::class, 'json');
+            //validate fields
             $errors = $this->validator->validate($customer);
             if (count($errors) > 0) {
                 $errorsString = (string) $errors;
@@ -95,15 +106,20 @@ class CustomerController
             //validate fields
             $errors = $this->validator->validate($dto);
             if (0 === count($errors)) {
-                // ... if validation is ok
+                $customer->setFirstName($dto->getFirstName());
+                $customer->setLastName($dto->getLastName());
+                $customer->setEmail($dto->getEmail());
+                $customer->setPhoneNumber($dto->get());
                 $this->customerRepository->updateCustomer($customer);
-                $jsonContent = $this->serializer->serialize($customer, 'json');
+                $jsonContent = $this->serializer->serialize($dto, 'json');
                 return new Response($jsonContent, Response::HTTP_OK);
             }else{
                 $errorsString = (string) $errors;
                 return new Response($errorsString);
             }
         }
+
+
     }
 
 
