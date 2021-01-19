@@ -42,7 +42,7 @@ class CustomerController
             return new Response($jsonContent, Response::HTTP_OK);
         }else{
             $jsonContent = $this->serializer->serialize($errors,'json');
-            return new Response($jsonContent, Response::HTTP_OK);
+            return new Response($jsonContent, Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -65,7 +65,7 @@ class CustomerController
             return new Response($jsonContent, Response::HTTP_OK);
         }else{
             $jsonContent = $this->serializer->serialize($errors,'json');
-            return new Response($jsonContent, Response::HTTP_OK);
+            return new Response($jsonContent, Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -82,7 +82,7 @@ class CustomerController
             $errors = $this->validator->validate($customer);
             if (count($errors) > 0) {
                 $errorsString = (string) $errors;
-                return new Response($errorsString);
+                return new Response($errorsString,Response::HTTP_BAD_REQUEST);
             }
         }
         $jsonContent = $this->serializer->serialize($customers, 'json');
@@ -115,7 +115,7 @@ class CustomerController
                 return new Response($jsonContent, Response::HTTP_OK);
             }else{
                 $errorsString = (string) $errors;
-                return new Response($errorsString);
+                return new Response($errorsString,Response::HTTP_BAD_REQUEST);
             }
         }
 
@@ -133,7 +133,7 @@ class CustomerController
         //if customer is not found
         if($customer === null ){
             $errorsString = (string) "Customer not found with a certain id";
-            return new Response($errorsString);
+            return new Response($errorsString,Response::HTTP_BAD_REQUEST);
         }else{
             $this->customerRepository->removeCustomer($customer);
             $jsonContent = $this->serializer->serialize($customer, 'json');

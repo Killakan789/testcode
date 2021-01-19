@@ -38,7 +38,7 @@ final class CustomerDTO
     public $email;
     /**
      * @Assert\Type("string")
-     * @Assert\Length(min = 8, max = 20, minMessage = "minimal length is 8 numbers in a string", maxMessage = "maximal length is 20 numbers in a string")
+     * @Assert\Length(min = 8, max = 20)
      * @Assert\NotNull()
      * @Assert\NotBlank()
      */
