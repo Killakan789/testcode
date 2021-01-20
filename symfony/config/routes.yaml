@@ -25,3 +25,7 @@ update:
 delete:
   path: /customer/delete/{id}
   controller: App\Controller\CustomerController::delete
+
+app_logout:
+  path: /logout
+  methods: GET

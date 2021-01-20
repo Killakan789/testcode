@@ -127,6 +127,36 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CCustomer%24email%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CCustomer%24phoneNumber%5D%5B1%5D' => 15,
 '%5B%5BC%5DApp%5CEntity%5CCustomer%24phoneNumber%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%5D%5B1%5D' => 16,
+'%5B%5BC%5DApp%5CEntity%5CUser%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getEmail%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getEmail%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setEmail%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setEmail%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getUsername%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getUsername%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getRoles%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getRoles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setRoles%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setRoles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getPassword%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getPassword%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setPassword%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setPassword%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getSalt%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getSalt%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23eraseCredentials%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23eraseCredentials%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24id%5D%5B1%5D' => 14,
+'%5B%5BC%5DApp%5CEntity%5CUser%24id%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24email%5D%5B1%5D' => 17,
+'%5B%5BC%5DApp%5CEntity%5CUser%24email%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 18,
+'%5B%5BC%5DApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24password%5D%5B1%5D' => 19,
+'%5B%5BC%5DApp%5CEntity%5CUser%24password%5D%5B1%5D' => 2,
 '%5BDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 1,
 '%5B%5BC%5DDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 2,
 '%5BDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%23setContainer%5D%5B1%5D' => 1,
@@ -583,12 +613,92 @@ return [[
 '%5B%5BC%5DSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%23__invoke%5D%5B1%5D' => 2,
 '%5BSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%24twig%5D%5B1%5D' => 1,
 '%5B%5BC%5DSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%24twig%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23__construct%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23body%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23body%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23stylesheet%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%23stylesheet%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%24errorRenderer%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%24errorRenderer%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%24profiler%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CExceptionPanelController%24profiler%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23__construct%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23homeAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23homeAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23panelAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23panelAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23toolbarAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23toolbarAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchBarAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchBarAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchResultsAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchResultsAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23searchAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23phpinfoAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23phpinfoAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23openAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23openAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23getTemplateManager%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23getTemplateManager%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23denyAccessIfProfilerDisabled%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23denyAccessIfProfilerDisabled%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23renderWithCspNonces%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%23renderWithCspNonces%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24templateManager%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24templateManager%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24generator%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24generator%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24profiler%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24profiler%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24twig%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24twig%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24templates%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24templates%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24cspHandler%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24cspHandler%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24baseDir%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CProfilerController%24baseDir%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23__construct%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23panelAction%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23panelAction%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23getTraces%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%23getTraces%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24profiler%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24profiler%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24twig%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24twig%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24matcher%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24matcher%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24routes%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24routes%5D%5B1%5D' => 2,
+'%5BSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24expressionLanguageProviders%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CBundle%5CWebProfilerBundle%5CController%5CRouterController%24expressionLanguageProviders%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23__construct%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23supports%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23supports%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23resolve%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23resolve%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%24tokenStorage%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%24tokenStorage%5D%5B1%5D' => 2,
 
 ], [
 
 0 => 'N;',
 1 => [],
-2 => 1610525418,
+2 => 1611171457,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -894,6 +1004,79 @@ return [[
                 ],
             ],
         ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+16 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'repositoryClass' => [
+                    'App\\Repository\\UserRepository',
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+17 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'length' => [
+                    180,
+                ],
+                'unique' => [
+                    true,
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+18 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'type' => [
+                    'json',
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+19 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [],
         [
             $o[0],
         ],

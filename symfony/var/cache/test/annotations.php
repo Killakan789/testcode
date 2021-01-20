@@ -117,8 +117,6 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CCustomer%23setPhoneNumber%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CCustomer%23toArray%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CCustomer%23toArray%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CCustomer%23toJson%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CCustomer%23toJson%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CCustomer%24id%5D%5B1%5D' => 14,
 '%5B%5BC%5DApp%5CEntity%5CCustomer%24id%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CCustomer%24firstName%5D%5B1%5D' => 15,
@@ -585,12 +583,22 @@ return [[
 '%5B%5BC%5DSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%23__invoke%5D%5B1%5D' => 2,
 '%5BSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%24twig%5D%5B1%5D' => 1,
 '%5B%5BC%5DSymfony%5CBundle%5CFrameworkBundle%5CController%5CTemplateController%24twig%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23__construct%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23supports%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23supports%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23resolve%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%23resolve%5D%5B1%5D' => 2,
+'%5BSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%24tokenStorage%5D%5B1%5D' => 1,
+'%5B%5BC%5DSymfony%5CComponent%5CSecurity%5CHttp%5CController%5CUserValueResolver%24tokenStorage%5D%5B1%5D' => 2,
 
 ], [
 
 0 => 'N;',
 1 => [],
-2 => 1610535392,
+2 => 1611170060,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
