@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 
@@ -29,7 +30,9 @@ class CustomerController
 
     /**
      * @Route("/customer/add", name="add_customer", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
+
     public function add(Request $request)
     {
         $dto = $this->serializer->deserialize($request->getContent(), CustomerDTO::class, 'json');
@@ -48,6 +51,7 @@ class CustomerController
 
     /**
      * @Route("/customer/{id}", name="get_one_customer", methods={"GET"})
+     * @IsGranted("ROLE_MANAGER")
      */
     public function get($id)
     {
@@ -70,8 +74,9 @@ class CustomerController
     }
 
     /**
-    //     * @Route("/customer/", name="get_all_customers", methods={"GET"})
-    //     */
+     * @Route("/customer/", name="get_all_customers", methods={"GET"})
+     * @IsGranted("ROLE_MANAGER")
+    */
     public function getAll()
     {
         $customers = $this->customerRepository->findAll();
@@ -92,10 +97,10 @@ class CustomerController
 
     /**
      * @Route("/customer/update/{id}", name="update_customer", methods={"PUT"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function update($id, Request $request)
     {
-
         $customer = $this->customerRepository->findOneBy(['id' => $id]);
         //if customer is not found
         if($customer === null ){
@@ -126,6 +131,7 @@ class CustomerController
 
     /**
      * @Route("/customer/delete/{id}", name="delete_customer", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete($id)
     {

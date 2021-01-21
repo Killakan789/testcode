@@ -29,3 +29,13 @@ delete:
 app_logout:
   path: /logout
   methods: GET
+
+indexadmin:
+  path: /admin
+  methods: GET
+  controller: App\Controller\AdminController::index
+
+admindashboard:
+  path: /admin/dashboard
+  methods: GET
+  controller: App\Controller\AdminController::adminDashboard

@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -34,10 +36,12 @@ class User implements UserInterface
      */
     private $password;
 
-     /**
-      * @ORM\Column(type="string", unique=true, nullable=true)
-      */
-    private $apiToken;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $username;
+
+
 
     public function getId(): ?int
     {
@@ -56,6 +60,9 @@ class User implements UserInterface
         return $this;
     }
 
+
+
+
     /**
      * A visual identifier that represents this user.
      *
@@ -64,6 +71,13 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
