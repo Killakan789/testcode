@@ -47,5 +47,10 @@ security:
     access_control:
         # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*
         - { path: '^/admin', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
+        - { path: '/customer', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
+        - { path: '/customer/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
+        - { path: '/customer/add', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
+        - { path: '/customer/update/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
+        - { path: '/customer/delete/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
 
 

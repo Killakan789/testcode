@@ -30,6 +30,7 @@ app_logout:
   path: /logout
   methods: GET
 
+
 indexadmin:
   path: /admin
   methods: GET
