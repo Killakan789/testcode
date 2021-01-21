@@ -381,6 +381,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Security\ApiKeyAuthenticator" class="App\Security\ApiKeyAuthenticator" autowire="true" autoconfigure="true">
+      <argument type="service" id="security.http_utils"/>
+    </service>
+    <service id="App\Security\ApiKeyUserProvider" class="App\Security\ApiKeyUserProvider" autowire="true" autoconfigure="true"/>
     <service id="App\Security\LoginFormAuthenticator" class="App\Security\LoginFormAuthenticator" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="router.default"/>
@@ -3631,6 +3635,46 @@
         </argument>
         <argument>null</argument>
       </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.ULJHMZ4"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+          <argument>ROLE_MANAGER</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.DNMCZUL"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+          <argument>ROLE_MANAGER</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.F2qHDKI"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.jDRBiCc"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.EznttEK"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="security.context_listener" class="Symfony\Component\Security\Http\Firewall\ContextListener">
       <tag name="monolog.logger" channel="security"/>
@@ -4075,6 +4119,21 @@
     </service>
     <service id=".security.request_matcher.5dJADCx" class="Symfony\Component\HttpFoundation\RequestMatcher">
       <argument>^/admin</argument>
+    </service>
+    <service id=".security.request_matcher.ULJHMZ4" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>/customer</argument>
+    </service>
+    <service id=".security.request_matcher.DNMCZUL" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>/customer/{id}</argument>
+    </service>
+    <service id=".security.request_matcher.F2qHDKI" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>/customer/add</argument>
+    </service>
+    <service id=".security.request_matcher.jDRBiCc" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>/customer/update/{id}</argument>
+    </service>
+    <service id=".security.request_matcher.EznttEK" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>/customer/delete/{id}</argument>
     </service>
     <service id="security.command.user_password_encoder" class="Symfony\Bundle\SecurityBundle\Command\UserPasswordEncoderCommand">
       <tag name="console.command" command="security:encode-password"/>
