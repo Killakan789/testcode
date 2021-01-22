@@ -18,17 +18,20 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        secured_area:
+            pattern: ^/customer
+            http_basic: ~
+            security: true
         main:
             anonymous: true
             lazy: true
-            provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
-#                    - App\Security\TokenAuthenticator
+            json_login:
+                check_path: login
+                username_path: security.credentials.login
+                password_path: security.credentials.password
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
             logout:
                 path: app_logout
 
