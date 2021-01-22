@@ -2,3 +2,13 @@ vendor/
 symfony/var/cache/
 symfony/var/log/
 .idea
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
