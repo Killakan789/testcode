@@ -22,3 +22,5 @@
 !bin/symfony_requirements
 /vendor/
 .idea/
+symfony/var/cache/
+symfony/vendor/
