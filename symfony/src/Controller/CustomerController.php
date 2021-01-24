@@ -33,7 +33,7 @@ class CustomerController
 
     /**
      * @Route("/customer/add", name="add_customer", methods={"POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_MANAGER")
      */
 
     public function add(Request $request)
@@ -54,7 +54,7 @@ class CustomerController
 
     /**
      * @Route("/customer/{id}", name="get_one_customer", methods={"GET"})
-     * @IsGranted("ROLE_MANAGER")
+     * @IsGranted("ROLE_USER")
      */
     public function get($id)
     {
@@ -78,7 +78,7 @@ class CustomerController
 
     /**
      * @Route("/customer/", name="get_all_customers", methods={"GET"})
-     * @IsGranted("ROLE_MANAGER")
+     * @IsGranted("ROLE_USER")
     */
     public function getAll()
     {
@@ -100,7 +100,7 @@ class CustomerController
 
     /**
      * @Route("/customer/update/{id}", name="update_customer", methods={"PUT"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_MANAGER")
      */
     public function update($id, Request $request)
     {
