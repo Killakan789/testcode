@@ -33,4 +33,22 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+    /**
+     * @Route("api/login", name="api_login")
+     */
+    public function apiLogin(AuthenticationUtils $authenticationUtils): Response
+    {
+        $jsonContent = json_encode('sample login');
+        return new Response($jsonContent, Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("api/logout", name="api_logout")
+     */
+    public function apiLogout()
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
 }

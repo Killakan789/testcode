@@ -39,7 +39,14 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials(Request $request)
     {
         return $request->headers->get('X-AUTH-TOKEN');
+        if ($token == 'ILuvAPIs') {
+            throw new CustomUserMessageAuthenticationException(
+                'ILuvAPIs is not a real API key: it\'s just a silly phrase'
+            );
+        }
     }
+
+
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {

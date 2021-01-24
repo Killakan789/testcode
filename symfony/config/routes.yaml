@@ -1,11 +1,7 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
-
-
 # config/routes.yaml
-
-# the "app_main_number" route name is not important yet
 add:
   path: /customer/add
   controller: App\Controller\CustomerController::add
@@ -26,14 +22,36 @@ delete:
   path: /customer/delete/{id}
   controller: App\Controller\CustomerController::delete
 
-app_login:
+login:
   path:       /login
   controller: App\Controller\SecurityController::login
-  methods: POST
+  methods: GET|POST
 
-app_logout:
+logout:
   path: /logout
-  methods: GET
+  controller: App\Controller\SecurityController::logout
+  methods: GET|POST
+
+#api routes
+apiAdd:
+  path: api/customer/add
+  controller: App\Controller\CustomerController::add
+
+apiGet:
+  path: api/customer/{id}
+  controller: App\Controller\CustomerController::get
+
+apiGetAll:
+  path: api/customer/
+  controller: App\Controller\CustomerController::getAll
+
+apiUpdate:
+  path: api/customer/update/{id}
+  controller: App\Controller\CustomerController::update
+
+apiDelete:
+  path: api/customer/delete/{id}
+  controller: App\Controller\CustomerController::delete
 
 indexadmin:
   path: /admin

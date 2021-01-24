@@ -42,6 +42,11 @@ class User implements UserInterface
      */
     private $username;
 
+     /**
+      * @ORM\Column(type="string", unique=true, nullable=true)
+      */
+     private $apiToken;
+
 
 
     public function getId(): ?int
@@ -82,6 +87,35 @@ class User implements UserInterface
     }
 
     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getApiToken(): string
+    {
+        return (string) $this->apiToken;
+    }
+
+    public function setApiToken(): self
+    {
+        $this->apiToken = $this->generateRandomString();
+
+        return $this;
+    }
+
+    public function generateRandomString()
+    {
+        $length = 125;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -114,6 +148,8 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 
     /**
      * @see UserInterface
