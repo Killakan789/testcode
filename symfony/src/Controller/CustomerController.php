@@ -28,7 +28,6 @@ class CustomerController
         $this->customerRepository = $customerRepository;
         $this->validator = $validator;
         $this->serializer  =  $serializer;
-        $this->serializer  =  $serializer;
     }
 
     /**
