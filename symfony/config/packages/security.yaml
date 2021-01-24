@@ -4,7 +4,6 @@ security:
         ROLE_ADMIN: [ ROLE_ADMIN ]
         ROLE_MANAGER: [ ROLE_MANAGER ]
         ROLE_USER: [ ROLE_USER ]
-        ROLE_API: [ ROLE_API ]
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -31,13 +30,11 @@ security:
                 path: app_logout
     access_control:
         # web version
-        - { path: '/customer', roles: [ IS_AUTHENTICATED_FULLY, ROLE_USER ] }
-        - { path: '/customer/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_USER ] }
-        - { path: '/customer/add', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
-        - { path: '/customer/update/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
+        - { path: '/customer', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
+        - { path: '/customer/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_MANAGER ] }
+        - { path: '/customer/add', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
+        - { path: '/customer/update/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
         - { path: '/customer/delete/{id}', roles: [ IS_AUTHENTICATED_FULLY, ROLE_ADMIN ] }
-        # api version
-        - { path: '^api/', roles: [ ROLE_API ] }
 
 
 

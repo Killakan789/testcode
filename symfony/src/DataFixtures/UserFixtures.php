@@ -24,8 +24,7 @@ class UserFixtures extends Fixture
         $user->setUsername('testuser');
         $user->setApiToken();
         $user->setRoles([
-            'ROLE_USER',
-            'ROLE_API'
+            'ROLE_USER'
         ]);
         $manager->persist($user);
         $manager->flush();
@@ -37,8 +36,7 @@ class UserFixtures extends Fixture
         $user->setApiToken();
         $user->setRoles([
             'ROLE_USER',
-            'ROLE_MANAGER',
-            'ROLE_API',
+            'ROLE_MANAGER'
         ]);
         $manager->persist($user);
         $manager->flush();
@@ -52,8 +50,6 @@ class UserFixtures extends Fixture
             'ROLE_USER',
             'ROLE_MANAGER',
             'ROLE_ADMIN',
-            'ROLE_API',
-
         ]);
         $manager->persist($user);
         $manager->flush();
