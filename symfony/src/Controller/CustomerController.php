@@ -22,6 +22,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CustomerController
 {
     private $customerRepository;
+    private $validator;
+    private $serializer;
 
     public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator,SerializerInterface $serializer)
     {
