@@ -10,7 +10,7 @@ get:
   path: /customer/{id}
   controller: App\Controller\CustomerController::get
 
-getAll:
+get_all:
   path: /customer/
   controller: App\Controller\CustomerController::getAll
 
@@ -32,33 +32,12 @@ logout:
   controller: App\Controller\SecurityController::logout
   methods: GET|POST
 
-#api routes
-apiAdd:
-  path: api/customer/add
-  controller: App\Controller\CustomerController::add
-
-apiGet:
-  path: api/customer/{id}
-  controller: App\Controller\CustomerController::get
-
-apiGetAll:
-  path: api/customer/
-  controller: App\Controller\CustomerController::getAll
-
-apiUpdate:
-  path: api/customer/update/{id}
-  controller: App\Controller\CustomerController::update
-
-apiDelete:
-  path: api/customer/delete/{id}
-  controller: App\Controller\CustomerController::delete
-
-indexadmin:
+index_admin:
   path: /admin
   methods: GET
   controller: App\Controller\AdminController::index
 
-admindashboard:
+admin_dashboard:
   path: /admin/dashboard
   methods: GET
   controller: App\Controller\AdminController::adminDashboard

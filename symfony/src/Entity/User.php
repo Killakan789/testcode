@@ -42,12 +42,6 @@ class User implements UserInterface
      */
     private $username;
 
-     /**
-      * @ORM\Column(type="string", unique=true, nullable=true)
-      */
-     private $apiToken;
-
-
 
     public function getId(): ?int
     {
@@ -86,22 +80,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getApiToken(): string
-    {
-        return (string) $this->apiToken;
-    }
 
-    public function setApiToken(): self
-    {
-        $this->apiToken = $this->generateRandomString();
-
-        return $this;
-    }
 
     public function generateRandomString()
     {
