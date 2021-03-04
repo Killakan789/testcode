@@ -25,7 +25,6 @@ delete:
 login:
   path:       /login
   controller: App\Controller\SecurityController::login
-  methods: GET|POST
 
 logout:
   path: /logout
