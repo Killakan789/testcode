@@ -56,4 +56,14 @@ class CustomerTest extends WebTestCase
 		$this->assertEquals(200, $client->getResponse()->getStatusCode());
 	}
 
+	public function фввCustomer()
+	{
+		$client = static::createClient([], [
+			'PHP_AUTH_USER' => 'testadmin21@gmail.com',
+			'PHP_AUTH_PW'   => '123456',
+		]);
+		$client->request('POST', '/customer/add');
+		$this->assertEquals(200, $client->getResponse()->getStatusCode());
+	}
+
 }
