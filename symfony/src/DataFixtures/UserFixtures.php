@@ -22,6 +22,7 @@ class UserFixtures extends Fixture
         $user->setPassword($this->passwordEncoder->encodePassword($user, '123456'));
         $user->setEmail('testuser21@gmail.com');
         $user->setUsername('testuser');
+        $user->setApiToken();
         $user->setRoles([
             'ROLE_USER'
         ]);
@@ -32,6 +33,7 @@ class UserFixtures extends Fixture
         $user->setPassword($this->passwordEncoder->encodePassword($user, '123456'));
         $user->setEmail('testmanager21@gmail.com');
         $user->setUsername('testmanager');
+        $user->setApiToken();
         $user->setRoles([
             'ROLE_USER',
             'ROLE_MANAGER'
@@ -43,6 +45,7 @@ class UserFixtures extends Fixture
         $user->setPassword($this->passwordEncoder->encodePassword($user, '123456'));
         $user->setEmail('testadmin21@gmail.com');
         $user->setUsername('testadmin');
+        $user->setApiToken();
         $user->setRoles([
             'ROLE_USER',
             'ROLE_MANAGER',

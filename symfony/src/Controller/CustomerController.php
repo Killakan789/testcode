@@ -12,6 +12,7 @@ use App\Repository\CustomerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints as Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -21,6 +22,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CustomerController
 {
     private $customerRepository;
+    private $validator;
+    private $serializer;
 
     public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator,SerializerInterface $serializer)
     {
