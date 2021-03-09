@@ -43,7 +43,6 @@ class User implements UserInterface
     private $username;
 
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +80,20 @@ class User implements UserInterface
         return $this;
     }
 
+
+
+    public function generateRandomString()
+    {
+        $length = 125;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     /**
      * @see UserInterface
      */
@@ -114,6 +127,8 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 
     /**
      * @see UserInterface

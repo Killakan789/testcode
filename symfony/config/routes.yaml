@@ -1,11 +1,7 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
-
-
 # config/routes.yaml
-
-# the "app_main_number" route name is not important yet
 add:
   path: /customer/add
   controller: App\Controller\CustomerController::add
@@ -14,7 +10,7 @@ get:
   path: /customer/{id}
   controller: App\Controller\CustomerController::get
 
-getAll:
+get_all:
   path: /customer/
   controller: App\Controller\CustomerController::getAll
 
@@ -26,20 +22,21 @@ delete:
   path: /customer/delete/{id}
   controller: App\Controller\CustomerController::delete
 
-app_login:
+login:
   path:       /login
   controller: App\Controller\SecurityController::login
 
-app_logout:
+logout:
   path: /logout
-  methods: GET
+  controller: App\Controller\SecurityController::logout
+  methods: GET|POST
 
-indexadmin:
+index_admin:
   path: /admin
   methods: GET
   controller: App\Controller\AdminController::index
 
-admindashboard:
+admin_dashboard:
   path: /admin/dashboard
   methods: GET
   controller: App\Controller\AdminController::adminDashboard

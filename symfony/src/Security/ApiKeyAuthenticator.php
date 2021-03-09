@@ -24,12 +24,12 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
 
     public function createToken(Request $request, $providerKey)
     {
-
+        // set the only URL where we should look for auth information
+        // and only return the token if we're at that URL
         $targetUrl = '/login/check';
         if ($request->getPathInfo() !== $targetUrl) {
             return;
         }
-
 
         // look for an apikey query parameter
         $apiKey = $request->query->get('apikey');
@@ -51,11 +51,20 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         );
     }
 
-
-
     public function supportsToken(TokenInterface $token, $providerKey)
     {
         return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
+    }
+
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        return new Response(
+        // this contains information about *why* authentication failed
+        // use it, or return your own message
+            strtr($exception->getMessageKey(), $exception->getMessageData()),
+            401
+        );
     }
 
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
@@ -97,48 +106,6 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
             $apiKey,
             $providerKey,
             $user->getRoles()
-        );
-    }
-
-//    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
-//    {
-//        if (!$userProvider instanceof ApiKeyUserProvider) {
-//            throw new \InvalidArgumentException(
-//                sprintf(
-//                    'The user provider must be an instance of ApiKeyUserProvider (%s was given).',
-//                    get_class($userProvider)
-//                )
-//            );
-//        }
-//
-//        $apiKey = $token->getCredentials();
-//        $username = $userProvider->getUsernameForApiKey($apiKey);
-//
-//        if (!$username) {
-//            // CAUTION: this message will be returned to the client
-//            // (so don't put any un-trusted messages / error strings here)
-//            throw new CustomUserMessageAuthenticationException(
-//                sprintf('API Key "%s" does not exist.', $apiKey)
-//            );
-//        }
-//
-//        $user = $userProvider->loadUserByUsername($username);
-//
-//        return new PreAuthenticatedToken(
-//            $user,
-//            $apiKey,
-//            $providerKey,
-//            $user->getRoles()
-//        );
-//    }
-
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
-        return new Response(
-        // this contains information about *why* authentication failed
-        // use it, or return your own message
-            strtr($exception->getMessageKey(), $exception->getMessageData()),
-            401
         );
     }
 }
