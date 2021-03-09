@@ -78,10 +78,10 @@ class CustomerController
     }
 
     /**
-     * @Route("/customer/", name="get_all_customers", methods={"GET"})
+     * @Route("/customer/", name="get_all", methods={"GET"})
      * @IsGranted("ROLE_USER")
     */
-    public function getAll()
+    public function get_all()
     {
         $customers = $this->customerRepository->findAll();
         foreach ($customers as $customer) {

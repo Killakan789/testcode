@@ -12,7 +12,7 @@ get:
 
 get_all:
   path: /customer/
-  controller: App\Controller\CustomerController::getAll
+  controller: App\Controller\CustomerController::get_all
 
 update:
   path: /customer/update/{id}
@@ -39,4 +39,4 @@ index_admin:
 admin_dashboard:
   path: /admin/dashboard
   methods: GET
-  controller: App\Controller\AdminController::adminDashboard
+  controller: App\Controller\AdminController::admin_dashboard
