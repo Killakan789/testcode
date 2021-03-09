@@ -12,6 +12,7 @@ use App\Repository\CustomerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints as Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -21,6 +22,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CustomerController
 {
     private $customerRepository;
+    private $validator;
+    private $serializer;
 
     public function __construct(CustomerRepository $customerRepository,ValidatorInterface $validator,SerializerInterface $serializer)
     {
@@ -31,7 +34,7 @@ class CustomerController
 
     /**
      * @Route("/customer/add", name="add_customer", methods={"POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_MANAGER")
      */
 
     public function add(Request $request)
@@ -52,7 +55,7 @@ class CustomerController
 
     /**
      * @Route("/customer/{id}", name="get_one_customer", methods={"GET"})
-     * @IsGranted("ROLE_MANAGER")
+     * @IsGranted("ROLE_USER")
      */
     public function get($id)
     {
@@ -98,7 +101,7 @@ class CustomerController
 
     /**
      * @Route("/customer/update/{id}", name="update_customer", methods={"PUT"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_MANAGER")
      */
     public function update($id, Request $request)
     {
