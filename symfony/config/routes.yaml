@@ -4,8 +4,6 @@ index:
 
 
 # config/routes.yaml
-
-# the "app_main_number" route name is not important yet
 add:
   path: /customer/add
   controller: App\Controller\CustomerController::add
