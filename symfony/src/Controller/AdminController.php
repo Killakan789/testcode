@@ -39,7 +39,7 @@ class AdminController extends AbstractController
      *
       * @IsGranted("ROLE_MANAGER")
       */
-    public function adminDashboard()
+    public function admin_dashboard()
     {
 
         $user = $this->get('security.token_storage')->getToken()->getUser();

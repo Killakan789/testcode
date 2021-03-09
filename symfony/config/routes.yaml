@@ -14,9 +14,9 @@ get:
   path: /customer/{id}
   controller: App\Controller\CustomerController::get
 
-getAll:
+get_all:
   path: /customer/
-  controller: App\Controller\CustomerController::getAll
+  controller: App\Controller\CustomerController::get_all
 
 update:
   path: /customer/update/{id}
@@ -34,12 +34,12 @@ app_logout:
   path: /logout
   methods: GET
 
-indexadmin:
+index_admin:
   path: /admin
   methods: GET
   controller: App\Controller\AdminController::index
 
-admindashboard:
+admin_dashboard:
   path: /admin/dashboard
   methods: GET
-  controller: App\Controller\AdminController::adminDashboard
+  controller: App\Controller\AdminController::admin_dashboard
